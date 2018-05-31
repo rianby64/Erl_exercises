@@ -5,8 +5,8 @@ test() ->
   4 = l([1, 7, 2, 9]),
   120 = fac(5),
   10 = sum([1, 2, 3, 4]),
-  F = fun(X) -> 2*X end,
-  [2, 4, 6, 8] = map([1, 2, 3, 4], F).
+  [2, 3, 4] = reverse([4, 3, 2]),
+  [2, 4, 6, 8] = map([1, 2, 3, 4], fun(X) -> 2*X end).
 
 %% l([]) ->
 %%   0;
@@ -39,7 +39,18 @@ t_sum(N, []) -> N;
 t_sum(N, [H|Arr]) ->
   t_sum(N + H, Arr).
 
-map([], F) ->
+%% map([], F) ->
+%%   [];
+%% map([H|T], F) ->
+%%   [F(H)|map(T, F)].
+
+reverse([]) ->
   [];
-map([H|T], F) ->
-  [F(H)|map(T, F)].
+reverse([H|T]) ->
+  reverse(T) ++ [H].
+
+map(Arr, F) ->
+  reverse(t_map(Arr, F, [])).
+t_map([], _, Acc) -> Acc;
+t_map([H|T], F, Acc) ->
+  t_map(T, F, [F(H)|Acc]).
