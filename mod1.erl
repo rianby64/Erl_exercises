@@ -15,30 +15,30 @@ test() ->
 %%   1 + l(T).
 
 len(L) ->
-  t_len(L, 0).
+  len(L, 0).
 
-t_len([], Acc) -> Acc;
-t_len([_|T], Acc) ->
-  t_len(T, Acc + 1).
+len([], Acc) -> Acc;
+len([_|T], Acc) ->
+  len(T, Acc + 1).
 
 %% fac(0) ->
 %%   1;
 %% fac(N) ->
 %%   N * fac(N - 1).
 
-fac(N) -> t_fac(N, 1).
-t_fac(0, Acc) -> Acc;
-t_fac(N, Acc) when N > 0 ->
-  t_fac(N - 1, Acc * N).
+fac(N) -> fac(N, 1).
+fac(0, Acc) -> Acc;
+fac(N, Acc) when N > 0 ->
+  fac(N - 1, Acc * N).
 
 %% sum([]) -> 0;
 %% sum([I|T]) ->
 %%   I + sum(T).
 
-sum(Arr) -> t_sum(0, Arr).
-t_sum(N, []) -> N;
-t_sum(N, [H|Arr]) ->
-  t_sum(N + H, Arr).
+sum(Arr) -> sum(0, Arr).
+sum(N, []) -> N;
+sum(N, [H|Arr]) ->
+  sum(N + H, Arr).
 
 %% map([], F) ->
 %%   [];
@@ -46,10 +46,10 @@ t_sum(N, [H|Arr]) ->
 %%   [F(H)|map(T, F)].
 
 map(Arr, F) ->
-  reverse(t_map(Arr, F, [])).
-t_map([], _, Acc) -> Acc;
-t_map([H|T], F, Acc) ->
-  t_map(T, F, [F(H)|Acc]).
+  reverse(map(Arr, F, [])).
+map([], _, Acc) -> Acc;
+map([H|T], F, Acc) ->
+  map(T, F, [F(H)|Acc]).
 
 %% reverse([]) ->
 %%   [];
@@ -57,11 +57,11 @@ t_map([H|T], F, Acc) ->
 %%   reverse(T) ++ [H].
 
 reverse(Arr) ->
-  t_reverse([], Arr).
-t_reverse(Acc, [])
+  reverse([], Arr).
+reverse(Acc, [])
   -> Acc;
-t_reverse(Acc, [H|T]) ->
-  t_reverse([H] ++ Acc, T).
+reverse(Acc, [H|T]) ->
+  reverse([H] ++ Acc, T).
 
 %% zip([], []) ->
 %%   [];
@@ -69,8 +69,8 @@ t_reverse(Acc, [H|T]) ->
 %%   [{H1, H2} | zip(T1, T2)].
 
 zip(Arr1, Arr2) ->
-  reverse(t_zip([], Arr1, Arr2)).
-t_zip(Acc, [], []) ->
+  reverse(zip([], Arr1, Arr2)).
+zip(Acc, [], []) ->
   Acc;
-t_zip(Acc, [H1|T1], [H2|T2]) ->
-  t_zip([{H1, H2} | Acc], T1, T2).
+zip(Acc, [H1|T1], [H2|T2]) ->
+  zip([{H1, H2} | Acc], T1, T2).
