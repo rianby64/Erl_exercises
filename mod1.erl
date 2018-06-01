@@ -7,7 +7,9 @@ test() ->
   10 = sum([1, 2, 3, 4]),
   [2, 3, 4] = reverse([4, 3, 2]),
   [2, 4, 6, 8] = map([1, 2, 3, 4], fun(X) -> 2*X end),
-  [{a, 1}, {b, 2}, {c, 3}] = zip([a, b, c], [1, 2, 3]).
+  [{a, 1}, {b, 2}, {c, 3}] = zip([a, b, c], [1, 2, 3]),
+  [6, 6, 6, 6] = repeat(6, 4),
+  hooray.
 
 %% l([]) ->
 %%   0;
@@ -16,7 +18,6 @@ test() ->
 
 len(L) ->
   len(L, 0).
-
 len([], Acc) -> Acc;
 len([_|T], Acc) ->
   len(T, Acc + 1).
@@ -74,3 +75,15 @@ zip(Acc, [], []) ->
   Acc;
 zip(Acc, [H1|T1], [H2|T2]) ->
   zip([{H1, H2} | Acc], T1, T2).
+
+%% repeat(T, 1) ->
+%%   [T];
+%% repeat(T, N) when N > 0 ->
+%%   [T] ++ repeat(T, N - 1).
+
+repeat(T, N) when N > 0 ->
+  repeat(T, N, []).
+repeat(T, 1, Acc) ->
+  [T] ++ Acc;
+repeat(T, N, Acc) ->
+  repeat(T, N - 1, [T] ++ Acc).
