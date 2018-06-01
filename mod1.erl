@@ -13,13 +13,13 @@ test() ->
 
 %% l([]) ->
 %%   0;
-%% l([_|T]) ->
+%% l([_ | T]) ->
 %%   1 + l(T).
 
 len(L) ->
   len(L, 0).
 len([], Acc) -> Acc;
-len([_|T], Acc) ->
+len([_ | T], Acc) ->
   len(T, Acc + 1).
 
 %% fac(0) ->
@@ -33,47 +33,47 @@ fac(N, Acc) when N > 0 ->
   fac(N - 1, Acc * N).
 
 %% sum([]) -> 0;
-%% sum([I|T]) ->
+%% sum([I | T]) ->
 %%   I + sum(T).
 
 sum(Arr) -> sum(0, Arr).
 sum(N, []) -> N;
-sum(N, [H|Arr]) ->
+sum(N, [H | Arr]) ->
   sum(N + H, Arr).
 
 %% map([], F) ->
 %%   [];
-%% map([H|T], F) ->
-%%   [F(H)|map(T, F)].
+%% map([H | T], F) ->
+%%   [F(H) | map(T, F)].
 
 map(Arr, F) ->
   reverse(map(Arr, F, [])).
 map([], _, Acc) -> Acc;
-map([H|T], F, Acc) ->
-  map(T, F, [F(H)|Acc]).
+map([H | T], F, Acc) ->
+  map(T, F, [F(H) | Acc]).
 
 %% reverse([]) ->
 %%   [];
-%% reverse([H|T]) ->
+%% reverse([H | T]) ->
 %%   reverse(T) ++ [H].
 
 reverse(Arr) ->
   reverse([], Arr).
 reverse(Acc, [])
   -> Acc;
-reverse(Acc, [H|T]) ->
-  reverse([H] ++ Acc, T).
+reverse(Acc, [H | T]) ->
+  reverse([H | Acc], T).
 
 %% zip([], []) ->
 %%   [];
-%% zip([H1|T1], [H2|T2]) ->
+%% zip([H1 | T1], [H2 | T2]) ->
 %%   [{H1, H2} | zip(T1, T2)].
 
 zip(Arr1, Arr2) ->
   reverse(zip([], Arr1, Arr2)).
 zip(Acc, [], []) ->
   Acc;
-zip(Acc, [H1|T1], [H2|T2]) ->
+zip(Acc, [H1 | T1], [H2 | T2]) ->
   zip([{H1, H2} | Acc], T1, T2).
 
 %% repeat(T, 1) ->
@@ -84,6 +84,6 @@ zip(Acc, [H1|T1], [H2|T2]) ->
 repeat(T, N) when N > 0 ->
   repeat(T, N, []).
 repeat(T, 1, Acc) ->
-  [T] ++ Acc;
+  [T | Acc];
 repeat(T, N, Acc) ->
-  repeat(T, N - 1, [T] ++ Acc).
+  repeat(T, N - 1, [T | Acc]).
