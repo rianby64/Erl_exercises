@@ -44,13 +44,20 @@ t_sum(N, [H|Arr]) ->
 %% map([H|T], F) ->
 %%   [F(H)|map(T, F)].
 
-reverse([]) ->
-  [];
-reverse([H|T]) ->
-  reverse(T) ++ [H].
-
 map(Arr, F) ->
   reverse(t_map(Arr, F, [])).
 t_map([], _, Acc) -> Acc;
 t_map([H|T], F, Acc) ->
   t_map(T, F, [F(H)|Acc]).
+
+%% reverse([]) ->
+%%   [];
+%% reverse([H|T]) ->
+%%   reverse(T) ++ [H].
+
+reverse(Arr) ->
+  t_reverse([], Arr).
+t_reverse(Acc, [])
+  -> Acc;
+t_reverse(Acc, [H|T]) ->
+  t_reverse([H] ++ Acc, T).
