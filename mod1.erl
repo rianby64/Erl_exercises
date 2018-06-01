@@ -9,6 +9,7 @@ test() ->
   [2, 4, 6, 8] = map([1, 2, 3, 4], fun(X) -> 2*X end),
   [{a, 1}, {b, 2}, {c, 3}] = zip([a, b, c], [1, 2, 3]),
   [6, 6, 6, 6] = repeat(6, 4),
+  [1, 2, 3, 4] = sublist([1, 2, 3, 4, 5, 6, 7], 4),
   hooray.
 
 %% l([]) ->
@@ -87,3 +88,8 @@ repeat(T, 1, Acc) ->
   [T | Acc];
 repeat(T, N, Acc) ->
   repeat(T, N - 1, [T | Acc]).
+
+sublist(_, 0) ->
+  [];
+sublist([H | T], N) ->
+  [H | sublist(T, N - 1)].
