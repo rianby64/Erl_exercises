@@ -48,10 +48,10 @@ sum(N, [H | Arr]) ->
 %%   [F(H) | map(T, F)].
 
 map(Arr, F) ->
-  reverse(map(Arr, F, [])).
+  map(Arr, F, []).
 map([], _, Acc) -> Acc;
 map([H | T], F, Acc) ->
-  map(T, F, [F(H) | Acc]).
+  map(T, F, Acc ++ [F(H)]).
 
 %% reverse([]) ->
 %%   [];
@@ -71,11 +71,11 @@ reverse(Acc, [H | T]) ->
 %%   [{H1, H2} | zip(T1, T2)].
 
 zip(Arr1, Arr2) ->
-  reverse(zip([], Arr1, Arr2)).
+  zip([], Arr1, Arr2).
 zip(Acc, [], []) ->
   Acc;
 zip(Acc, [H1 | T1], [H2 | T2]) ->
-  zip([{H1, H2} | Acc], T1, T2).
+  zip(Acc ++ [{H1, H2}], T1, T2).
 
 %% repeat(T, 1) ->
 %%   [T];
@@ -97,6 +97,6 @@ repeat(T, N, Acc) ->
 sublist(Arr, N) ->
   sublist(Arr, N, []).
 sublist(_, 0, Acc) ->
-  reverse(Acc);
+  Acc;
 sublist([H | T], N, Acc) ->
-  sublist(T, N - 1, [H | Acc]).
+  sublist(T, N - 1, Acc ++ [H]).
