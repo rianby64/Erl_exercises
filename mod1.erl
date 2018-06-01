@@ -89,7 +89,14 @@ repeat(T, 1, Acc) ->
 repeat(T, N, Acc) ->
   repeat(T, N - 1, [T | Acc]).
 
-sublist(_, 0) ->
-  [];
-sublist([H | T], N) ->
-  [H | sublist(T, N - 1)].
+%% sublist(_, 0) ->
+%%   [];
+%% sublist([H | T], N) ->
+%%   [H | sublist(T, N - 1)].
+
+sublist(Arr, N) ->
+  sublist(Arr, N, []).
+sublist(_, 0, Acc) ->
+  reverse(Acc);
+sublist([H | T], N, Acc) ->
+  sublist(T, N - 1, [H | Acc]).
