@@ -2,7 +2,7 @@
 -export([test/0]).
 
 test() ->
-  4 = l([1, 7, 2, 9]),
+  4 = len([1, 7, 2, 9]),
   120 = fac(5),
   10 = sum([1, 2, 3, 4]),
   [2, 3, 4] = reverse([4, 3, 2]),
@@ -14,12 +14,12 @@ test() ->
 %% l([_|T]) ->
 %%   1 + l(T).
 
-l(L) ->
-  t_l(L, 0).
+len(L) ->
+  t_len(L, 0).
 
-t_l([], Acc) -> Acc;
-t_l([_|T], Acc) ->
-  t_l(T, Acc + 1).
+t_len([], Acc) -> Acc;
+t_len([_|T], Acc) ->
+  t_len(T, Acc + 1).
 
 %% fac(0) ->
 %%   1;
