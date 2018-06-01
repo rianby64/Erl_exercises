@@ -6,7 +6,8 @@ test() ->
   120 = fac(5),
   10 = sum([1, 2, 3, 4]),
   [2, 3, 4] = reverse([4, 3, 2]),
-  [2, 4, 6, 8] = map([1, 2, 3, 4], fun(X) -> 2*X end).
+  [2, 4, 6, 8] = map([1, 2, 3, 4], fun(X) -> 2*X end),
+  [{a, 1}, {b, 2}, {c, 3}] = zip([a, b, c], [1, 2, 3]).
 
 %% l([]) ->
 %%   0;
@@ -61,3 +62,15 @@ t_reverse(Acc, [])
   -> Acc;
 t_reverse(Acc, [H|T]) ->
   t_reverse([H] ++ Acc, T).
+
+%% zip([], []) ->
+%%   [];
+%% zip([H1|T1], [H2|T2]) ->
+%%   [{H1, H2} | zip(T1, T2)].
+
+zip(Arr1, Arr2) ->
+  reverse(t_zip([], Arr1, Arr2)).
+t_zip(Acc, [], []) ->
+  Acc;
+t_zip(Acc, [H1|T1], [H2|T2]) ->
+  t_zip([{H1, H2} | Acc], T1, T2).
