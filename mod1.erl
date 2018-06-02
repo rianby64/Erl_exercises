@@ -13,10 +13,17 @@ test() ->
   [5, 7, 9, 11, 13] = range(5, 2, 5),
   hooray.
 
-range(S, _, 1) ->
-  [S];
+%% range(S, _, 1) ->
+%%   [S];
+%% range(S, I, N) ->
+%%   [S | range(S + I, I, N - 1)].
+
 range(S, I, N) ->
-  [S | range(S + I, I, N - 1)].
+  range(S, I, N, []).
+range(S, _, 1, Acc) ->
+  Acc ++ [S];
+range(S, I, N, Acc) ->
+  range(S + I, I, N - 1, Acc ++ [S]).
 
 %% l([]) ->
 %%   0;
